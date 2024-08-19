@@ -7,41 +7,53 @@ const getSpeedElem = () => {
 }
 
 const getSpeed = () => {
-    const curSpeed = getSpeedElem().innerText
+    const speedElem = getSpeedElem();
+    if (!speedElem) {
+        console.error("Speed element not found!");
+        return 0; 
+    }
 
-    const speedNum = parseFloat(curSpeed)
+    const curSpeed = speedElem.innerText;
+    const speedNum = parseFloat(curSpeed);
+    return speedNum
+};
 
-    return speedNum.toFixed(1)
+
+const humanizeSpeed = (num) => {
+    let str = num.toString()
+
+    if(!str.includes(".")){
+        str = str.concat(".0")
+    }
+
+    return str
 }
 
 const updateSpeed = () => {
-    const curSpeed = getSpeed()
+    const curSpeed = getSpeed();
 
     if (curSpeed < topSpeed) {
-        return
+        return;
     }
 
-    topSpeed = curSpeed
+    topSpeed = curSpeed;
 
-    const topSpeedElem = document.getElementById("ui-top-speed-val")
-    if (topSpeedElem) {
-        topSpeedElem.innerText = topSpeed
-        return
-    }
+    let topSpeedElem = document.getElementById("ui-top-speed-val");
+
+    if (!topSpeedElem) {
+        topSpeedElem = document.createElement("span");
+        topSpeedElem.id = "ui-top-speed-val";
+        topSpeedElem.className = "ui-stat-val";
+        topSpeedElem.textContent = humanizeSpeed(topSpeed);
     
-}
+        const speedElem = getSpeedElem();
+        speedElem.parentNode.insertBefore(topSpeedElem, speedElem.nextSibling);
+    }
 
-const createTopSpeedElem = () => {
-    const speedElem = getSpeedElem();
-    const topSpeedElem = document.createElement("span");
+    topSpeedElem.innerText = humanizeSpeed(topSpeed);
 
-    topSpeedElem.id = "ui-top-speed-val";
-    topSpeedElem.className = "ui-stat-val";
-    topSpeedElem.innerText = topSpeed;
-    speedElem.after(topSpeedElem);
 };
 
 const tickSpeed = 100
 
-createTopSpeedElem()
 setInterval(updateSpeed, tickSpeed)
