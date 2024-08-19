@@ -1,0 +1,20 @@
+{
+    "manifest_version": 3,
+    "name": "SlowRoads Top Speed Mod",
+    "version": "1.0",
+    "description": "A simple mod to track and display top speed in slowroads.io",
+    "permissions": [
+      "activeTab",
+      "scripting"
+    ],
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "content_scripts": [
+      {
+        "matches": ["https://slowroads.io/"],
+        "js": ["src/topSpeed.js"]
+      }
+    ]
+  }
+  
