@@ -1,11 +1,12 @@
 
 let topSpeed = 0.0
 
-
+// gets the speed dom element
 const getSpeedElem = () => {
     return document.getElementById("ui-speed-val")
 }
 
+// gets the value of the players cur. speed
 const getSpeed = () => {
     const speedElem = getSpeedElem();
     if (!speedElem) {
@@ -18,7 +19,7 @@ const getSpeed = () => {
     return speedNum
 };
 
-
+// Turns number into a more human readable string 
 const humanizeSpeed = (num) => {
     let str = num.toString()
 
@@ -29,6 +30,7 @@ const humanizeSpeed = (num) => {
     return str
 }
 
+// creates the dom node for the top speed
 const createSpeedElem = () => {
     topSpeedElem = document.createElement("span");
     topSpeedElem.id = "ui-top-speed-val";
@@ -36,6 +38,7 @@ const createSpeedElem = () => {
     topSpeedElem.textContent = humanizeSpeed(topSpeed);
 }
 
+// compares the top and cur. speed, updating top if necessary
 const updateSpeed = () => {
     const curSpeed = getSpeed();
 
