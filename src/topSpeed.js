@@ -29,6 +29,13 @@ const humanizeSpeed = (num) => {
     return str
 }
 
+const createSpeedElem = () => {
+    topSpeedElem = document.createElement("span");
+    topSpeedElem.id = "ui-top-speed-val";
+    topSpeedElem.className = "ui-stat-val";
+    topSpeedElem.textContent = humanizeSpeed(topSpeed);
+}
+
 const updateSpeed = () => {
     const curSpeed = getSpeed();
 
@@ -41,11 +48,8 @@ const updateSpeed = () => {
     let topSpeedElem = document.getElementById("ui-top-speed-val");
 
     if (!topSpeedElem) {
-        topSpeedElem = document.createElement("span");
-        topSpeedElem.id = "ui-top-speed-val";
-        topSpeedElem.className = "ui-stat-val";
-        topSpeedElem.textContent = humanizeSpeed(topSpeed);
-    
+        topSpeedElem = createSpeedElem()
+
         const speedElem = getSpeedElem();
         speedElem.parentNode.insertBefore(topSpeedElem, speedElem.nextSibling);
     }
