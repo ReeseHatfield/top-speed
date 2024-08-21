@@ -32,10 +32,12 @@ const humanizeSpeed = (num) => {
 
 // creates the dom node for the top speed
 const createSpeedElem = () => {
-    topSpeedElem = document.createElement("span");
+    const topSpeedElem = document.createElement("span");
     topSpeedElem.id = "ui-top-speed-val";
     topSpeedElem.className = "ui-stat-val";
     topSpeedElem.textContent = humanizeSpeed(topSpeed);
+
+    return topSpeedElem
 }
 
 // compares the top and cur. speed, updating top if necessary
